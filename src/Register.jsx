@@ -7,16 +7,26 @@ import {
   View,
 } from 'react-native';
 import React, { useState } from 'react';
+import registerUser from './services/auth';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const registerUser = async () => {
+  const handleRegister = async () => {
     if (password != confirmPassword) {
       Alert.alert('Error', 'Password not matched');
       return;
+    }
+    try {
+      await registerUser(email, password);
+      Alert.alert('Success', 'Verification mail has been sent please check');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+    } catch (error) {
+      Alert.alert('Error', error.message);
     }
   };
   return (
@@ -45,7 +55,10 @@ const Register = () => {
           value={confirmPassword}
           secureTextEntry
         />
-        <TouchableOpacity style={styles.registerButton} onPress={registerUser}>
+        <TouchableOpacity
+          style={styles.registerButton}
+          onPress={handleRegister}
+        >
           <Text style={styles.registerButtonText}>Register</Text>
         </TouchableOpacity>
       </View>
