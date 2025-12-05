@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import React, { useState } from 'react';
-import registerUser from './services/auth';
+import { registerUser } from './services/auth';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -27,6 +27,7 @@ const Register = () => {
       setConfirmPassword('');
     } catch (error) {
       Alert.alert('Error', error.message);
+      console.log('Error', error.message);
     }
   };
   return (
