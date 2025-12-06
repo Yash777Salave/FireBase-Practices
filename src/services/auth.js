@@ -23,6 +23,9 @@ const registerUser = async (email, password) => {
       case 'auth/invalid-password':
         errorMessage = 'Weak password, use 6 digit at least';
         break;
+      case 'auth/wrong-password':
+        errorMessage = 'Weak password, use 6 digit at least';
+        break;
 
       default:
         errorMessage = 'An unknown error occured';
@@ -33,14 +36,14 @@ const registerUser = async (email, password) => {
 };
 const loginUser = async (email, password) => {
   try {
-    console.log('from LoginUser Function ------>');
+    // console.log('from LoginUser Function ------>');
     const userCredential = await auth().signInWithEmailAndPassword(
       email,
       password,
     );
     const user = userCredential.user;
-    return { user, emailVerified: user.emailVerified }; // two items we return to calling function because we need to know there that is our email is verified or not so we need to check that is why er return 2 statemnts here
-    // here bove we use user.emailVerified to know true or false so if i click to verified on email's message thn ti would be true
+    return { user, emailVerified: user.emailVerified }; // two items we return to calling function because we need to know there that is our email is verified or not so we need to check that is why we are return 2 statemnts here
+    // here above we use user.emailVerified to know true or false so if i click to verified on email's message thn ti would be true
   } catch (error) {
     let errorMessage;
     switch (error.code) {
@@ -48,7 +51,7 @@ const loginUser = async (email, password) => {
         errorMessage = 'Incorrect password';
         break;
       case 'auth/user-not-found':
-        errorMessage = 'User mot found';
+        errorMessage = 'User not found';
         break;
 
       default:
@@ -60,10 +63,12 @@ const loginUser = async (email, password) => {
 };
 
 const resetPassword = async email => {
-  console.log('im fro Reset Password ---------> ');
+  console.log('im from Reset Password ---------> ');
   try {
+    console.log('im from Reset Password 2---------> ');
+
     await auth().sendPasswordResetEmail(email);
-    return userCredential;
+    console.log('im from Reset Password 3---------> ');
   } catch (error) {
     let errorMessage;
     switch (error.code) {

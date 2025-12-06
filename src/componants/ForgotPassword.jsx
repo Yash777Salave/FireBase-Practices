@@ -8,8 +8,10 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { resetPassword } from '../services/auth';
+import { useNavigation } from '@react-navigation/native';
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const navigation = useNavigation();
   const handleResetPassword = async () => {
     console.log('Im from handle reset function');
     if (!email) {
@@ -21,6 +23,9 @@ const ForgotPassword = () => {
       await resetPassword(email);
       Alert.alert('Success!', 'Reset password mail has been sent');
       setEmail('');
+      setTimeout(() => {
+        navigation.navigate('Login');
+      }, 250);
     } catch (error) {
       //   console.log('Im from catch block with error-----------> ', error.message);
 

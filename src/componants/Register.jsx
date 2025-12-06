@@ -8,11 +8,13 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { registerUser } from '../services/auth';
+import { useNavigation } from '@react-navigation/native';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const navigation = useNavigation();
 
   const handleRegister = async () => {
     if (password != confirmPassword) {
@@ -25,6 +27,9 @@ const Register = () => {
       setEmail('');
       setPassword('');
       setConfirmPassword('');
+      setTimeout(() => {
+        navigation.navigate('Login');
+      }, 250);
     } catch (error) {
       Alert.alert('Error', error.message);
       console.log('Error', error.message);

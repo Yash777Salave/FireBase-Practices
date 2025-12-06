@@ -8,10 +8,12 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { loginUser } from '../services/auth';
+import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -53,6 +55,23 @@ const Login = () => {
         />
         <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.loginText}>Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.registerTextContainer}
+          onPress={() => {
+            navigation.navigate('Register');
+          }}
+        >
+          <Text style={styles.DontHaveAccountText}>Don't have account?</Text>
+          <Text style={styles.DontHaveAccountText}>Register</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.registerTextContainer}
+          onPress={() => {
+            navigation.navigate('ForgotPassword');
+          }}
+        >
+          <Text style={styles.forgotPasswordText}>Forgot Password</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -98,5 +117,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'semibold',
     color: '#ffff',
+  },
+  registerTextContainer: {
+    flexDirection: 'row',
+    gap: 10,
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  DontHaveAccountText: {
+    color: 'red',
+    textDecorationLine: 'underline',
+  },
+  forgotPasswordText: {
+    color: 'red',
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
