@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import React, { useState } from 'react';
-import { loginUser } from './services/auth';
+import { loginUser } from '../services/auth';
 
 const Login = () => {
   const [email, setEmail] = useState('');

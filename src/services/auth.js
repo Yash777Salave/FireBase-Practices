@@ -58,4 +58,25 @@ const loginUser = async (email, password) => {
     throw new Error(errorMessage);
   }
 };
-export { registerUser, loginUser };
+
+const resetPassword = async email => {
+  console.log('im fro Reset Password ---------> ');
+  try {
+    await auth().sendPasswordResetEmail(email);
+    return userCredential;
+  } catch (error) {
+    let errorMessage;
+    switch (error.code) {
+      case 'auth/user-not-found':
+        errorMessage = 'Email not found !!';
+        break;
+      case 'auth/invalid-email':
+        errorMessage = 'Please enter correct email address !!';
+        break;
+      default:
+        errorMessage = 'An Unknown Error occured';
+    }
+    throw new Error(errorMessage);
+  }
+};
+export { registerUser, loginUser, resetPassword };
