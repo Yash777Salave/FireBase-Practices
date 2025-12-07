@@ -5,11 +5,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import Login from '../componants/Login';
 import Register from '../componants/Register';
 import ForgotPassword from '../componants/ForgotPassword';
+import userCRUD from '../componants/userCRUD';
 const Stack = createNativeStackNavigator();
 const StackNavigation = () => {
   return (
-    <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen
+    // <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator>
+      {/* <Stack.Screen
         name="Login"
         component={Login}
         options={{ headerShown: false }}
@@ -22,6 +24,11 @@ const StackNavigation = () => {
       <Stack.Screen
         name="ForgotPassword"
         component={ForgotPassword}
+        options={{ headerShown: false }}
+      /> */}
+      <Stack.Screen
+        name="userCRUD"
+        component={userCRUD}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
